@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/country-chalkboard/static/css/main.a617e044.chunk.css",
+    "main.js": "/country-chalkboard/static/js/main.1ae57ed5.chunk.js",
+    "main.js.map": "/country-chalkboard/static/js/main.1ae57ed5.chunk.js.map",
+    "runtime-main.js": "/country-chalkboard/static/js/runtime-main.52c0f65d.js",
+    "runtime-main.js.map": "/country-chalkboard/static/js/runtime-main.52c0f65d.js.map",
+    "static/js/2.c5fb560b.chunk.js": "/country-chalkboard/static/js/2.c5fb560b.chunk.js",
+    "static/js/2.c5fb560b.chunk.js.map": "/country-chalkboard/static/js/2.c5fb560b.chunk.js.map",
+    "static/js/3.60e2fb92.chunk.js": "/country-chalkboard/static/js/3.60e2fb92.chunk.js",
+    "static/js/3.60e2fb92.chunk.js.map": "/country-chalkboard/static/js/3.60e2fb92.chunk.js.map",
+    "index.html": "/country-chalkboard/index.html",
+    "static/css/main.a617e044.chunk.css.map": "/country-chalkboard/static/css/main.a617e044.chunk.css.map",
+    "static/js/2.c5fb560b.chunk.js.LICENSE.txt": "/country-chalkboard/static/js/2.c5fb560b.chunk.js.LICENSE.txt",
+    "static/media/map.4b1c6fe0.svg": "/country-chalkboard/static/media/map.4b1c6fe0.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.52c0f65d.js",
+    "static/js/2.c5fb560b.chunk.js",
+    "static/css/main.a617e044.chunk.css",
+    "static/js/main.1ae57ed5.chunk.js"
+  ]
+}
