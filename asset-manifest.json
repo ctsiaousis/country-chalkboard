@@ -1,23 +1,13 @@
 {
   "files": {
-    "main.css": "/country-chalkboard/static/css/main.f28cf3ec.chunk.css",
-    "main.js": "/country-chalkboard/static/js/main.e3c1d432.chunk.js",
-    "main.js.map": "/country-chalkboard/static/js/main.e3c1d432.chunk.js.map",
-    "runtime-main.js": "/country-chalkboard/static/js/runtime-main.9ceaca87.js",
-    "runtime-main.js.map": "/country-chalkboard/static/js/runtime-main.9ceaca87.js.map",
-    "static/css/2.9f6549c9.chunk.css": "/country-chalkboard/static/css/2.9f6549c9.chunk.css",
-    "static/js/2.f6ae63ea.chunk.js": "/country-chalkboard/static/js/2.f6ae63ea.chunk.js",
-    "static/js/2.f6ae63ea.chunk.js.map": "/country-chalkboard/static/js/2.f6ae63ea.chunk.js.map",
+    "main.css": "/country-chalkboard/static/css/main.0af68f49.css",
+    "main.js": "/country-chalkboard/static/js/main.6de45ad2.js",
     "index.html": "/country-chalkboard/index.html",
-    "static/css/2.9f6549c9.chunk.css.map": "/country-chalkboard/static/css/2.9f6549c9.chunk.css.map",
-    "static/css/main.f28cf3ec.chunk.css.map": "/country-chalkboard/static/css/main.f28cf3ec.chunk.css.map",
-    "static/js/2.f6ae63ea.chunk.js.LICENSE.txt": "/country-chalkboard/static/js/2.f6ae63ea.chunk.js.LICENSE.txt"
+    "main.0af68f49.css.map": "/country-chalkboard/static/css/main.0af68f49.css.map",
+    "main.6de45ad2.js.map": "/country-chalkboard/static/js/main.6de45ad2.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.9ceaca87.js",
-    "static/css/2.9f6549c9.chunk.css",
-    "static/js/2.f6ae63ea.chunk.js",
-    "static/css/main.f28cf3ec.chunk.css",
-    "static/js/main.e3c1d432.chunk.js"
+    "static/css/main.0af68f49.css",
+    "static/js/main.6de45ad2.js"
   ]
 }
