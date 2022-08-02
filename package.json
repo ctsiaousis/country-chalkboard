@@ -1,0 +1,38 @@
+{
+  "homepage": "https://ctsiaousis.github.io/country-chalkboard",
+  "name": "country-chalkboard",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
+    "mapbox-gl": "^2.9.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "canvas": "^2.9.3",
+    "react-scripts": "^5.0.1",
+    "randomcolor": "^0.6.2"
+  },
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": [
+    "defaults",
+    "not ie 11"
+  ],
+  "author": "Mapbox",
+  "license": "MIT",
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
+  }
+}
