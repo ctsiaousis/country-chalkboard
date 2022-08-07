@@ -2,14 +2,18 @@
 import './App.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import React, { useRef, useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown'
 import mapboxgl from 'mapbox-gl';
 import randomColor from 'randomcolor';
-import { data, visitedCountries } from './codeData';
+// import { data, visitedCountries } from './codeData';
+import { Parser } from './md-parser';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
+
 //////////////////////////////////////////////testing//////////////////////////////////////////////
-let customData = [...data];
+let visitedCountries = [...Parser.testVisitedCountries()];
+let customData = [...Parser.data()];
 var alpha3Map = new Map();
 for (var row of customData) {
   if (visitedCountries.includes(row['Country'])) {
@@ -17,6 +21,7 @@ for (var row of customData) {
   }
   alpha3Map.set(row['Alpha3'], row['en']);
 }
+
 /////////////////////////////////////////////\testing//////////////////////////////////////////////
 
 export default function App() {

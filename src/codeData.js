@@ -9,7 +9,8 @@ export function hexToRgb(hex) {
     } : null;
   }
 
-export const visitedCountries = ['Greece', 'Cyprus', 'Turkey', 'Serbia', 'Bulgaria', 'Italy', 'North Macedonia',
+  //test only
+export const testVisitedCountries = ['Greece', 'Cyprus', 'Turkey', 'Serbia', 'Bulgaria', 'Italy', 'North Macedonia',
   'Germany', 'Poland', 'France', 'Netherlands', 'Hungary', 'Austria', 'Lithuania', 'Sweden', 'Spain'];
 
 export var data = [
