@@ -1,13 +1,14 @@
 {
   "files": {
     "main.css": "/country-chalkboard/static/css/main.fc7184d6.css",
-    "main.js": "/country-chalkboard/static/js/main.c85c2615.js",
+    "main.js": "/country-chalkboard/static/js/main.4b2bdf8c.js",
+    "static/media/myTrip.md": "/country-chalkboard/static/media/myTrip.94ff6a693acab4a237a6.md",
     "index.html": "/country-chalkboard/index.html",
     "main.fc7184d6.css.map": "/country-chalkboard/static/css/main.fc7184d6.css.map",
-    "main.c85c2615.js.map": "/country-chalkboard/static/js/main.c85c2615.js.map"
+    "main.4b2bdf8c.js.map": "/country-chalkboard/static/js/main.4b2bdf8c.js.map"
   },
   "entrypoints": [
     "static/css/main.fc7184d6.css",
-    "static/js/main.c85c2615.js"
+    "static/js/main.4b2bdf8c.js"
   ]
 }
