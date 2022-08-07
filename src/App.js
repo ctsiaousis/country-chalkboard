@@ -2,11 +2,23 @@
 import './App.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import React, { useRef, useEffect, useState } from 'react';
-import ReactMarkdown from 'react-markdown'
+// import ReactMarkdown from 'react-markdown'
 import mapboxgl from 'mapbox-gl';
 import randomColor from 'randomcolor';
-// import { data, visitedCountries } from './codeData';
 import { Parser } from './md-parser';
+
+import { marked } from 'marked';
+import markedImages from 'marked-images';
+// var markedImages = require('marked-images');
+
+// opts are optional
+var opts = {
+  xhtml: false,
+  // fqImages: { route: '/country-chalkboard/static/media/', url:'https://images.example.com' }, // use custom image endpoint url when link starts with route
+  // fqLinks: 'https://www.example.com',                                // generate fully qualified links if fqImages is not set
+  relPath: ''
+}
+marked.use(markedImages(opts));
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
@@ -123,28 +135,35 @@ export default function App() {
       let visited = false;
       let featureProp;
       if (features.length === 1) { //mouse on a country, make border bold
-        if (alpha3Map.get(features[0].properties.iso_3166_1_alpha_3)[0]){
+        if (alpha3Map.get(features[0].properties.iso_3166_1_alpha_3)[0]) {
           visited = true;
           featureProp = features[0];
         }
       }
       else if (features.length === 2) {
-        if (alpha3Map.get(features[1].properties.iso_3166_1_alpha_3)[0]){
+        if (alpha3Map.get(features[1].properties.iso_3166_1_alpha_3)[0]) {
           visited = true;
           featureProp = features[1];
         }
       }
-      if(!visited) return;
+      if (!visited) return;
 
       console.log(featureProp);
-       
-      new mapboxgl.Popup()
-      .setLngLat([alpha3Map.get(featureProp.properties.iso_3166_1_alpha_3)[1],
-      alpha3Map.get(featureProp.properties.iso_3166_1_alpha_3)[2]])
-      .setHTML("<h1>Hello World!</h1>")
-      .addTo(map.current);
-      }
-      );
+
+      let body = mParser.getBodyOfCountry(featureProp.properties.name_en);
+
+      const html = marked.parse(body);
+
+      console.log(html);
+      console.log('<p><img src="'+mParser.images[0]+'" alt="An Image of marker.properties.title"></p>');
+      
+      new mapboxgl.Popup({className : 'popup-content'})
+        .setLngLat([alpha3Map.get(featureProp.properties.iso_3166_1_alpha_3)[2],
+        alpha3Map.get(featureProp.properties.iso_3166_1_alpha_3)[1]])
+        .setHTML(html)
+        .addTo(map.current);
+    }
+    );
 
     map.current.on("mousemove", function (e) {
       if (!map.current.loaded()) return; // wait for map to initialize
@@ -152,14 +171,14 @@ export default function App() {
 
       console.log(features);
       if (features.length === 1) { //mouse on a country, make border bold
-        if (alpha3Map.get(features[0].properties.iso_3166_1_alpha_3)[0]){
+        if (alpha3Map.get(features[0].properties.iso_3166_1_alpha_3)[0]) {
           map.current.setFilter("countries-join-2", ["==", "name_en", features[0].properties.name_en]);
           map.current.getCanvas().style.cursor = 'pointer';
         }
       }
       else if (features.length === 2) {
 
-        if (alpha3Map.get(features[1].properties.iso_3166_1_alpha_3)[0]){
+        if (alpha3Map.get(features[1].properties.iso_3166_1_alpha_3)[0]) {
           map.current.setFilter("countries-join-2", ["==", "name_en", features[1].properties.name_en]);
           map.current.getCanvas().style.cursor = 'pointer';
         }

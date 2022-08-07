@@ -7,6 +7,11 @@ for (let entry in tripEntries) {
     Markdown[entry] = require(`./markdown/${tripEntries[entry]}`)
 }
 
+function importAll(r) {
+    return r.keys().map(r);
+}
+
+
 class MdTuple {
     constructor(title, body) {
         this.title = title;
@@ -22,6 +27,7 @@ export class Parser {
         this.raw_contents = '';
         this.tripInfo = new MdTuple('', '');
         this.countriesInfo = new Map();
+        this.images = importAll(require.context('./markdown/pictures', true, /\.(png|jpe?g|svg)$/));
     }
 
     visitedCountries() {
@@ -39,6 +45,7 @@ export class Parser {
     getBodyOfCountry(country_name) {
         if (!this.countriesInfo.has(country_name))
             return '';
+
         return this.countriesInfo.get(country_name).body;
     }
     // Method
@@ -55,6 +62,9 @@ export class Parser {
 
         // this.parseFromFile(Markdown[tripEntries.indexOf(this.md_file)]);
 
+        console.log(Markdown[tripEntries.indexOf(this.md_file)]);
+        console.log(this.images);
+
         let result = await makeRequest("GET", Markdown[tripEntries.indexOf(this.md_file)]);
 
         if (!result.length) {
@@ -70,11 +80,14 @@ export class Parser {
         var lines = this.raw_contents.split('\n');
         let isParsingTitle = false;
         let isSection = false;
+        let isPicture = false;
         let curCountry = '';
         for (var i = 0; i < lines.length; i++) {
             let line = lines.at(i);
 
             isSection = line.startsWith('#') && !line.startsWith('###'); //more than two are body
+
+            isPicture = line.startsWith('![');
 
             if (line.startsWith('# ')) { //note the space
                 isParsingTitle = true;
@@ -87,6 +100,7 @@ export class Parser {
                 this.tripInfo.title = line.split('# ').at(1);
             }
             if (isParsingTitle && !isSection) {
+
                 this.tripInfo.body = this.tripInfo.body.concat(line + '\n');
             }
             if (!isParsingTitle && isSection) {
@@ -95,7 +109,29 @@ export class Parser {
             }
             if (!isParsingTitle && !isSection) {
                 let heapTuple = this.countriesInfo.get(curCountry);
-                heapTuple.body = heapTuple.body.concat(line + '\n');
+
+                var tmpLine = line;
+
+                if (isPicture) {
+                    let reduced = line.split('(').at(1).split(' ').at(0);
+                    reduced = reduced.replace('./pictures/', '');
+                    reduced = reduced.split('.').at(0);
+                    console.log(reduced);
+                    console.log(`-0----------------------------------------- reduced: ${reduced}`);
+                    for(var img in this.images){
+                        console.log(`-0----------------------------------------- includes: ${this.images[img].includes(reduced)} ${img}`);
+                        if(this.images[img].includes(reduced)){
+                            console.log(`-0----------------------------------------- includes: ${this.images[img]}`);
+
+                            const regex = /\.(png|jpe?g|svg)$/i;
+                            tmpLine = tmpLine.replace('./pictures/'+reduced,this.images[img].replace(regex,''));
+                            console.log(`-0----------------------------------------- AFTER: ${tmpLine}`);
+                        }
+                    }
+                }
+
+                console.log(`-0-----------------------------------------:${isPicture} ${tmpLine}`);
+                heapTuple.body = heapTuple.body.concat(tmpLine + '\n');
                 this.countriesInfo.set(curCountry, heapTuple);
             }
         }

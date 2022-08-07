@@ -58,3 +58,11 @@ body > #root > div {
   border-radius: 4px;
 }
     
+.mapboxgl-popup {
+  width: 400px;
+  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  }
+
+  img {
+    max-width: 200px;
+  }
