@@ -10,9 +10,11 @@ module.exports = function override(config, env) {
         "https": require.resolve("https-browserify"),
         "os": require.resolve("os-browserify"),
         "util": require.resolve("util"),
-        "fs": require.resolve("browserify-fs"),
+        // "fs": require.resolve("fs"),
         "path": require.resolve("path-browserify"),
-        "url": require.resolve("url")
+        "url": require.resolve("url"),
+        "buffer": require.resolve("buffer"),
+        "process": require.resolve("process"),
     })
     config.resolve.fallback = fallback;
     config.plugins = (config.plugins || []).concat([
@@ -20,6 +22,15 @@ module.exports = function override(config, env) {
             process: 'process/browser',
             Buffer: ['buffer', 'Buffer']
         })
-    ])
+    ]);
+
+    // react-dnd
+    config.module.rules.unshift({
+        test: /\.m?js$/,
+        resolve: {
+            fullySpecified: false, // disable the behaviour
+        },
+    });
+
     return config;
-}
+};

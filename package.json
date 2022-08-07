@@ -20,6 +20,9 @@
     "n-readlines": "^1.0.1",
     "node-polyfill-webpack-plugin": "^2.0.1"
   },
+  "devDependencies":{
+    "gh-pages": "^4.0.0"
+  },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
@@ -38,8 +41,5 @@
     "not ie 11"
   ],
   "author": "Chris Tsiaousis",
-  "license": "MIT",
-  "devDependencies": {
-    "gh-pages": "^4.0.0"
-  }
+  "license": "MIT"
 }

@@ -12,16 +12,17 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
 
 //////////////////////////////////////////////testing//////////////////////////////////////////////
-let visitedCountries = [...Parser.testVisitedCountries()];
 let customData = [...Parser.data()];
 var alpha3Map = new Map();
-for (var row of customData) {
-  if (visitedCountries.includes(row['Country'])) {
-    row['en'] = true;
+let mParser = new Parser("myTrip.md");
+mParser.parse().then(function () {
+  for (var row of customData) {
+    if (mParser.visitedCountries.includes(row['Country'])) {
+      row['en'] = true;
+    }
+    alpha3Map.set(row['Alpha3'], row['en']);
   }
-  alpha3Map.set(row['Alpha3'], row['en']);
-}
-
+});
 /////////////////////////////////////////////\testing//////////////////////////////////////////////
 
 export default function App() {
@@ -116,6 +117,34 @@ export default function App() {
       ]);
     });
 
+    map.current.on('click', (e) => {
+      // Copy coordinates array.
+      var features = map.current.queryRenderedFeatures(e.point, { layers: ["countries-join", "country-label"] });
+      let visited = false;
+      let featureProp;
+      if (features.length === 1) { //mouse on a country, make border bold
+        if (alpha3Map.get(features[0].properties.iso_3166_1_alpha_3)){
+          visited = true;
+          featureProp = features[0];
+        }
+      }
+      else if (features.length === 2) {
+        if (alpha3Map.get(features[1].properties.iso_3166_1_alpha_3)){
+          visited = true;
+          featureProp = features[1];
+        }
+      }
+      if(!visited) return;
+
+      console.log(featureProp);
+       
+      // new mapboxgl.Popup()
+      // .setLngLat(coordinates)
+      // .setHTML(description)
+      // .addTo(map.current);
+      }
+      );
+
     map.current.on("mousemove", function (e) {
       if (!map.current.loaded()) return; // wait for map to initialize
       var features = map.current.queryRenderedFeatures(e.point, { layers: ["countries-join", "country-label"] });
@@ -125,7 +154,6 @@ export default function App() {
           map.current.setFilter("countries-join-2", ["==", "name_en", features[0].properties.name_en]);
           map.current.getCanvas().style.cursor = 'pointer';
         }
-        console.log(features);
       }
       else if (features.length === 2) {
 
