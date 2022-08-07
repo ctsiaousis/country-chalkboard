@@ -8,7 +8,7 @@ for (let entry in tripEntries) {
 }
 
 class MdTuple {
-    constructor(title, body){
+    constructor(title, body) {
         this.title = title;
         this.body = body;
     }
@@ -20,7 +20,7 @@ export class Parser {
         this.is_valid = false;
         this.visitedCountries = testVisitedCountries;
         this.raw_contents = '';
-        this.tripInfo = new MdTuple('','');
+        this.tripInfo = new MdTuple('', '');
         this.countriesInfo = new Map();
     }
 
@@ -34,6 +34,12 @@ export class Parser {
 
     static data() {
         return data;
+    }
+
+    getBodyOfCountry(country_name) {
+        if (!this.countriesInfo.has(country_name))
+            return '';
+        return this.countriesInfo.get(country_name).body;
     }
     // Method
     async parse() {
@@ -70,33 +76,33 @@ export class Parser {
 
             isSection = line.startsWith('#') && !line.startsWith('###'); //more than two are body
 
-            if(line.startsWith('# ')){ //note the space
+            if (line.startsWith('# ')) { //note the space
                 isParsingTitle = true;
-            }else if(line.startsWith('## ')){ //parsing countries
+            } else if (line.startsWith('## ')) { //parsing countries
                 isParsingTitle = false;
             }
-            
+
             console.log(`Line ${i} sect?${isSection} title?${isParsingTitle} : ${line}`);
-            if(isParsingTitle && isSection){
+            if (isParsingTitle && isSection) {
                 this.tripInfo.title = line.split('# ').at(1);
             }
-            if(isParsingTitle && !isSection){
-                this.tripInfo.body = this.tripInfo.body.concat(line+'\n');
+            if (isParsingTitle && !isSection) {
+                this.tripInfo.body = this.tripInfo.body.concat(line + '\n');
             }
-            if(!isParsingTitle && isSection){
+            if (!isParsingTitle && isSection) {
                 curCountry = line.split('## ').at(1);
                 this.countriesInfo.set(curCountry, new MdTuple(curCountry, ''));
             }
-            if(!isParsingTitle && !isSection){
+            if (!isParsingTitle && !isSection) {
                 let heapTuple = this.countriesInfo.get(curCountry);
-                heapTuple.body = heapTuple.body.concat(line+'\n'); 
+                heapTuple.body = heapTuple.body.concat(line + '\n');
                 this.countriesInfo.set(curCountry, heapTuple);
             }
         }
         console.log(this.tripInfo.title);
         console.log(this.tripInfo.body);
-        console.log(Array.from( this.countriesInfo.keys() ));
-        this.visitedCountries = Array.from( this.countriesInfo.keys() );
+        console.log(Array.from(this.countriesInfo.keys()));
+        this.visitedCountries = Array.from(this.countriesInfo.keys());
     }
 }
 

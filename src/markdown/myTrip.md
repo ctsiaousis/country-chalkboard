@@ -4,6 +4,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales vestibulum 
 
 ## Greece
 
+![greece picture](./pictures/greece.jpg "greece picture")
+
 Quisque commodo dictum odio, id vulputate lorem porttitor quis. Quisque viverra pellentesque orci, sed pharetra nibh condimentum eu. Etiam porta, augue quis tincidunt aliquet, sapien augue vehicula diam, vehicula consequat mauris odio vitae ante. Cras feugiat urna a tortor fermentum, quis mattis metus scelerisque. Vestibulum augue arcu, porttitor sit amet dictum in, bibendum ut orci. Vivamus condimentum odio vitae tortor facilisis, at porttitor arcu eleifend. Nam sodales libero a tellus sodales dignissim. Sed sit amet diam nunc. 
 
 ## Italy

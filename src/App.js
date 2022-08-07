@@ -20,7 +20,7 @@ mParser.parse().then(function () {
     if (mParser.visitedCountries.includes(row['Country'])) {
       row['en'] = true;
     }
-    alpha3Map.set(row['Alpha3'], row['en']);
+    alpha3Map.set(row['Alpha3'], [row['en'], row['Lat'], row['Lon']]);
   }
 });
 /////////////////////////////////////////////\testing//////////////////////////////////////////////
@@ -123,13 +123,13 @@ export default function App() {
       let visited = false;
       let featureProp;
       if (features.length === 1) { //mouse on a country, make border bold
-        if (alpha3Map.get(features[0].properties.iso_3166_1_alpha_3)){
+        if (alpha3Map.get(features[0].properties.iso_3166_1_alpha_3)[0]){
           visited = true;
           featureProp = features[0];
         }
       }
       else if (features.length === 2) {
-        if (alpha3Map.get(features[1].properties.iso_3166_1_alpha_3)){
+        if (alpha3Map.get(features[1].properties.iso_3166_1_alpha_3)[0]){
           visited = true;
           featureProp = features[1];
         }
@@ -138,10 +138,11 @@ export default function App() {
 
       console.log(featureProp);
        
-      // new mapboxgl.Popup()
-      // .setLngLat(coordinates)
-      // .setHTML(description)
-      // .addTo(map.current);
+      new mapboxgl.Popup()
+      .setLngLat([alpha3Map.get(featureProp.properties.iso_3166_1_alpha_3)[1],
+      alpha3Map.get(featureProp.properties.iso_3166_1_alpha_3)[2]])
+      .setHTML("<h1>Hello World!</h1>")
+      .addTo(map.current);
       }
       );
 
@@ -149,15 +150,16 @@ export default function App() {
       if (!map.current.loaded()) return; // wait for map to initialize
       var features = map.current.queryRenderedFeatures(e.point, { layers: ["countries-join", "country-label"] });
 
+      console.log(features);
       if (features.length === 1) { //mouse on a country, make border bold
-        if (alpha3Map.get(features[0].properties.iso_3166_1_alpha_3)){
+        if (alpha3Map.get(features[0].properties.iso_3166_1_alpha_3)[0]){
           map.current.setFilter("countries-join-2", ["==", "name_en", features[0].properties.name_en]);
           map.current.getCanvas().style.cursor = 'pointer';
         }
       }
       else if (features.length === 2) {
 
-        if (alpha3Map.get(features[1].properties.iso_3166_1_alpha_3)){
+        if (alpha3Map.get(features[1].properties.iso_3166_1_alpha_3)[0]){
           map.current.setFilter("countries-join-2", ["==", "name_en", features[1].properties.name_en]);
           map.current.getCanvas().style.cursor = 'pointer';
         }
