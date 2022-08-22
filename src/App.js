@@ -2,31 +2,30 @@
 import './App.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import React, { useRef, useEffect, useState } from 'react';
-// import ReactMarkdown from 'react-markdown'
 import mapboxgl from 'mapbox-gl';
 import randomColor from 'randomcolor';
 import { Parser } from './md-parser';
-
 import { marked } from 'marked';
 import markedImages from 'marked-images';
-// var markedImages = require('marked-images');
-
-// opts are optional
+import { SideBar } from './SideBar';
 var opts = {
   xhtml: false,
-  // fqImages: { route: '/country-chalkboard/static/media/', url:'https://images.example.com' }, // use custom image endpoint url when link starts with route
-  // fqLinks: 'https://www.example.com',                                // generate fully qualified links if fqImages is not set
   relPath: ''
 }
 marked.use(markedImages(opts));
 
+
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
+
+var RELOADED = false;
 
 
 //////////////////////////////////////////////testing//////////////////////////////////////////////
 let customData = [...Parser.data()];
 var alpha3Map = new Map();
 let mParser = new Parser("myTrip.md");
+// SideBar.setParserFilenameCallback(mParser.setMdFileName);
+// SideBar.setParserCallback(
 mParser.parse().then(function () {
   for (var row of customData) {
     if (mParser.visitedCountries.includes(row['Country'])) {
@@ -34,8 +33,40 @@ mParser.parse().then(function () {
     }
     alpha3Map.set(row['Alpha3'], [row['en'], row['Lat'], row['Lon']]);
   }
-});
+  console.log(mParser.getTripEntries());
+  console.log(mParser.getCurrentEntryIdx());
+})
+// );
+
+function getSidebarState() {
+  return {
+    currentHtml: marked.parse(mParser.getCurTripMarkdown()),
+    currentTripIdx: mParser.getCurrentEntryIdx(),
+    currentFilename: mParser.md_file,
+    totalFilenames: mParser.getTripEntries().length,
+    filenameList: mParser.getTripEntries()
+  };
+}
+function parseNextTrip() {
+  mParser.setMdFileName("anotherTrip.md");
+  for (var row of customData) {
+    row['en'] = false;
+  }
+  alpha3Map.clear();
+  mParser.parse().then(function () {
+    for (var row of customData) {
+      if (mParser.visitedCountries.includes(row['Country'])) {
+        row['en'] = true;
+      }
+      alpha3Map.set(row['Alpha3'], [row['en'], row['Lat'], row['Lon']]);
+    }
+    console.log("finish1");
+  });
+  console.log("finish2");
+
+}
 /////////////////////////////////////////////\testing//////////////////////////////////////////////
+
 
 export default function App() {
   const mapContainer = useRef(null);
@@ -43,6 +74,24 @@ export default function App() {
   const [lng, setLng] = useState(24.018038);
   const [lat, setLat] = useState(35.513828);
   const [zoom, setZoom] = useState(3.5);
+
+  InitMap(mapContainer, map, lng, setLng, lat, setLat, zoom, setZoom);
+
+  return (
+    <div id="App">
+
+      <SideBar pageWrapId={"map-container-webgl-id"} outerContainerId={"App"} getState={getSidebarState} parseNext={parseNextTrip}/>
+      <div className="infobar">
+        Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
+      </div>
+      <div ref={mapContainer} className="map-container" id="map-container-webgl-id" />
+    </div>
+  );
+}
+
+
+
+function InitMap(mapContainer, map, lng, setLng, lat, setLat, zoom, setZoom) {
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -152,12 +201,12 @@ export default function App() {
 
       let body = mParser.getBodyOfCountry(featureProp.properties.name_en);
 
-      const html = marked.parse(body);
+      const html = marked.parse(`# ${featureProp.properties.name_en}\n` + body);
 
       console.log(html);
-      console.log('<p><img src="'+mParser.images[0]+'" alt="An Image of marker.properties.title"></p>');
-      
-      new mapboxgl.Popup({className : 'popup-content'})
+      console.log('<p><img src="' + mParser.images[0] + '" alt="An Image of marker.properties.title"></p>');
+
+      new mapboxgl.Popup({ className: 'popup-content' })
         .setLngLat([alpha3Map.get(featureProp.properties.iso_3166_1_alpha_3)[2],
         alpha3Map.get(featureProp.properties.iso_3166_1_alpha_3)[1]])
         .setHTML(html)
@@ -203,14 +252,7 @@ export default function App() {
       setZoom(map.current.getZoom().toFixed(2));
     });
   });
-
-  return (
-    <div>
-      <div className="sidebar">
-        Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
-      </div>
-      <div ref={mapContainer} className="map-container" />
-    </div>
-  );
 }
+
+
 

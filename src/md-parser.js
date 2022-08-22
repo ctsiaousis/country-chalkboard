@@ -1,7 +1,7 @@
 import { data, testVisitedCountries } from './codeData';
 // const nReadlines = require('n-readlines');
 const Markdown = {};
-const tripEntries = ["myTrip.md"];
+const tripEntries = ["myTrip.md", "anotherTrip.md"];
 
 for (let entry in tripEntries) {
     Markdown[entry] = require(`./markdown/${tripEntries[entry]}`)
@@ -42,12 +42,28 @@ export class Parser {
         return data;
     }
 
+    getTripEntries(){
+        return tripEntries;
+    }
+
+    getCurrentEntryIdx(){
+        return tripEntries.indexOf(this.md_file);
+    }
+
+    setMdFileName(newMdFile){
+        this.md_file = newMdFile;
+    }
+
     getBodyOfCountry(country_name) {
         if (!this.countriesInfo.has(country_name))
             return '';
 
         return this.countriesInfo.get(country_name).body;
     }
+    getCurTripMarkdown(){
+        return `# ${this.tripInfo.title}\n`+this.tripInfo.body;
+    }
+
     // Method
     async parse() {
         if (!tripEntries.includes(this.md_file)) {
@@ -55,6 +71,11 @@ export class Parser {
             console.error(`The requested entry ${this.md_file} does not exist`);
             return;
         }
+        this.is_valid = false;
+        this.visitedCountries = testVisitedCountries;
+        this.raw_contents = '';
+        this.tripInfo = new MdTuple('', '');
+        this.countriesInfo = new Map();
         // console.log(tripEntries.includes(this.md_file));
         // console.log(tripEntries.indexOf(this.md_file));
         // console.log(Markdown[tripEntries.indexOf(this.md_file)]);
@@ -95,7 +116,7 @@ export class Parser {
                 isParsingTitle = false;
             }
 
-            console.log(`Line ${i} sect?${isSection} title?${isParsingTitle} : ${line}`);
+            // console.log(`Line ${i} sect?${isSection} title?${isParsingTitle} : ${line}`);
             if (isParsingTitle && isSection) {
                 this.tripInfo.title = line.split('# ').at(1);
             }
@@ -116,21 +137,19 @@ export class Parser {
                     let reduced = line.split('(').at(1).split(' ').at(0);
                     reduced = reduced.replace('./pictures/', '');
                     reduced = reduced.split('.').at(0);
-                    console.log(reduced);
-                    console.log(`-0----------------------------------------- reduced: ${reduced}`);
+                    // console.log(reduced);
+                    // console.log(`-0----------------------------------------- reduced: ${reduced}`);
                     for(var img in this.images){
-                        console.log(`-0----------------------------------------- includes: ${this.images[img].includes(reduced)} ${img}`);
+                        // console.log(`-0----------------------------------------- includes: ${this.images[img].includes(reduced)} ${img}`);
                         if(this.images[img].includes(reduced)){
-                            console.log(`-0----------------------------------------- includes: ${this.images[img]}`);
-
+                            // console.log(`-0----------------------------------------- includes: ${this.images[img]}`);
                             const regex = /\.(png|jpe?g|svg)$/i;
                             tmpLine = tmpLine.replace('./pictures/'+reduced,this.images[img].replace(regex,''));
-                            console.log(`-0----------------------------------------- AFTER: ${tmpLine}`);
+                            // console.log(`-0----------------------------------------- AFTER: ${tmpLine}`);
                         }
                     }
                 }
-
-                console.log(`-0-----------------------------------------:${isPicture} ${tmpLine}`);
+                // console.log(`-0-----------------------------------------:${isPicture} ${tmpLine}`);
                 heapTuple.body = heapTuple.body.concat(tmpLine + '\n');
                 this.countriesInfo.set(curCountry, heapTuple);
             }
