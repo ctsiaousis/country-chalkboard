@@ -1,17 +1,21 @@
 {
   "files": {
-    "main.css": "/country-chalkboard/static/css/main.454b8ce2.css",
-    "main.js": "/country-chalkboard/static/js/main.7e7bf197.js",
+    "main.css": "/country-chalkboard/static/css/main.31adb83a.css",
+    "main.js": "/country-chalkboard/static/js/main.21aeb574.js",
+    "static/media/madagascar.jpg": "/country-chalkboard/static/media/madagascar.378e6b077f796d65edd8.jpg",
     "static/media/spain.jpg": "/country-chalkboard/static/media/spain.50c77ad5f2a62f659c11.jpg",
     "static/media/greece.jpg": "/country-chalkboard/static/media/greece.041b0b7c82129e6163ed.jpg",
     "static/media/italy.jpg": "/country-chalkboard/static/media/italy.b3008ae73cae36d9b2fb.jpg",
-    "static/media/myTrip.md": "/country-chalkboard/static/media/myTrip.3008da4179745fd6c4b4.md",
+    "static/media/brazil.jpg": "/country-chalkboard/static/media/brazil.f47f6814dd63512691fc.jpg",
+    "static/media/canada.jpg": "/country-chalkboard/static/media/canada.9f9ca2e9040359174ad7.jpg",
+    "static/media/myTrip.md": "/country-chalkboard/static/media/myTrip.03dc51be5b8a6e6695cb.md",
+    "static/media/anotherTrip.md": "/country-chalkboard/static/media/anotherTrip.63bdce0250f4220560dd.md",
     "index.html": "/country-chalkboard/index.html",
-    "main.454b8ce2.css.map": "/country-chalkboard/static/css/main.454b8ce2.css.map",
-    "main.7e7bf197.js.map": "/country-chalkboard/static/js/main.7e7bf197.js.map"
+    "main.31adb83a.css.map": "/country-chalkboard/static/css/main.31adb83a.css.map",
+    "main.21aeb574.js.map": "/country-chalkboard/static/js/main.21aeb574.js.map"
   },
   "entrypoints": [
-    "static/css/main.454b8ce2.css",
-    "static/js/main.7e7bf197.js"
+    "static/css/main.31adb83a.css",
+    "static/js/main.21aeb574.js"
   ]
 }
