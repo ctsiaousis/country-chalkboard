@@ -77,8 +77,8 @@ body>#root>div {
 .mapboxgl-popup {
   overflow-y: scroll;
   overflow-x: scroll;
-  max-width: 400px;
-  max-height: 400px;
+  max-width: 300px !important;
+  max-height: 400px !important;
   font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
   border-radius: 5px;
 }
@@ -93,7 +93,7 @@ body>#root>div {
 }
 
 img {
-  max-width: 200px;
+  max-width: 280px;
 }
 
 
