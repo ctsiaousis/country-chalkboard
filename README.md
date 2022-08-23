@@ -53,4 +53,4 @@ web application for it with users, online edit, commenting, notifications and so
 
 ## Contributing
 
-See [CONTRIBUTING](./CONTRIBUTING).
+See [CONTRIBUTING.md](./CONTRIBUTING.md).
