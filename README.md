@@ -16,9 +16,12 @@ This project is currently in development.
 - [x] Sidebar to select different trips
 - [x] Trip summary displayed on sidebar
 - [x] Auto focus first country when trip changes
+- [x] Support embeded videos on country pop-ups
+- [ ] Auto find available markdown files
 - [ ] Support for (graphical) paths and country ordering
-- [ ] Support embeded videos on country pop-ups
 - [ ] Add about section
+- [ ] Add regional boundary functionality
+- [ ] Add city functionality
 
 
 ## Project Screen Shot(s)
@@ -44,6 +47,18 @@ To Start Server:
 To Visit App:
 
 `localhost:3000/country-chalkboard`  
+
+## Posting your AWESOME trip
+
+1. Clone the repository: `git clone https://github.com/ctsiaousis/country-chalkboard`
+1. Change dir: `cd ./country-chalkboard`
+1. Create new local branch named *$USERNAME-trip*: `git checkout -B ctsiaousis-trip`
+1. `cd ./src/markdown`
+1. Create a markdown file named `$USERNAME.md` and compose your trip like the example `myTrip.md`
+1. Add desired pictures in the `/src/markdown/pictures` folder
+1. Add and commit your changes: `git add . && git commit -m "my awsome trip"`
+1. Push your changes: `git push origin $USERNAME-trip` (your branch name)
+1. Create a pull request to include them in the upstream
 
 ## Reflection
 

@@ -68,6 +68,7 @@ export class SideBar extends React.Component {
                 <h3>Select a trip and start exploring 🔭</h3>
                 <Select options={options} onChange={this.handleChange} />
                 <div dangerouslySetInnerHTML={{ __html: this.state.currentHtml }} />
+                <button type="button">Click</button>
             </Menu>
         );
     }
