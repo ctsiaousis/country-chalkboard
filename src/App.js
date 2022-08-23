@@ -17,6 +17,7 @@ marked.use(markedImages(opts));
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
+var updateID = -1;
 var mapContainer = undefined;
 var map = undefined;
 var [RELOADED, setRELOADED] = [false, () => { }];
@@ -40,9 +41,13 @@ mParser.parse().then(function () {
   }
   console.log(mParser.getTripEntries());
   console.log(mParser.getCurrentEntryIdx());
+  updateID++;
 })
 // );
 
+function getTripTitle() {
+  return mParser.tripInfo.title;
+} 
 function getSidebarState() {
   return {
     currentHtml: marked.parse(mParser.getCurTripMarkdown()),
@@ -53,10 +58,14 @@ function getSidebarState() {
   };
 }
 
-function parseNextTrip() {
-  var idx = mParser.getCurrentEntryIdx();
-  idx = (idx + 1) % mParser.getTripEntries().length;
-  mParser.setMdFileName(mParser.getTripEntries()[idx]);
+function parseNextTrip(filename = '') {
+  if(filename === ''){
+    var idx = mParser.getCurrentEntryIdx();
+    idx = (idx + 1) % mParser.getTripEntries().length;
+    mParser.setMdFileName(mParser.getTripEntries()[idx]);
+  }else{
+    mParser.setMdFileName(filename);
+  }
 
   for (var row of customData) {
     row['en'] = false;
@@ -69,11 +78,9 @@ function parseNextTrip() {
       }
       alpha3Map.set(row['Alpha3'], [row['en'], row['Lat'], row['Lon']]);
     }
-    console.log("finish1");
     setRELOADED(true);
+    updateID++;
   });
-  console.log("finish2");
-
 }
 /////////////////////////////////////////////\testing//////////////////////////////////////////////
 
@@ -90,8 +97,8 @@ export default function App() {
 
   return (
     <div id="App">
-
-      <SideBar pageWrapId={"map-container-webgl-id"} outerContainerId={"App"} getState={getSidebarState} parseNext={parseNextTrip} />
+      <SideBar pageWrapId={"map-container-webgl-id"} outerContainerId={"App"} getState={getSidebarState}
+      parseNext={parseNextTrip} getTitle={getTripTitle} updateID={updateID}/>
       <div className="infobar">
         Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
       </div>

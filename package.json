@@ -21,6 +21,7 @@
     "marked": "^4.0.18",
     "marked-images": "^3.0.0",
     "react-burger-menu": "^3.0.8",
+    "react-select": "^5.4.0",
     "node-polyfill-webpack-plugin": "^2.0.1"
   },
   "devDependencies":{

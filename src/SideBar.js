@@ -2,11 +2,13 @@
 import React from 'react';
 import { pushRotate as Menu } from 'react-burger-menu';
 
+import Select from 'react-select'
+
 
 export class SideBar extends React.Component {
     constructor(props) {
         super(props);
-        
+
         // Set initial state 
         this.state = {
             currentHtml: '',
@@ -18,11 +20,12 @@ export class SideBar extends React.Component {
 
         console.log("myprops");
         console.log(props);
-        
+
         // Binding this keyword 
         this.updateState = this.updateState.bind(this);
         this.test1 = this.test1.bind(this);
         this.test2 = this.test2.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     updateState() {
@@ -32,13 +35,13 @@ export class SideBar extends React.Component {
 
     componentDidMount() {
         this.updateState();
-      }
-      componentDidUpdate(prevProps) {
+    }
+    componentDidUpdate(prevProps) {
         // Typical usage (don't forget to compare props):
-        if (this.props.currentTripIdx !== prevProps.currentTripIdx) {
+        if (this.props.updateID !== prevProps.updateID) {
             this.updateState();
         }
-      }
+    }
 
     test1() {
         this.updateState();
@@ -48,13 +51,22 @@ export class SideBar extends React.Component {
         this.updateState();
     }
 
+    handleChange(selectedOption) {
+        console.log(selectedOption.value);
+        this.props.parseNext(selectedOption.value);
+    }
+
     render() {
         // NOTE: You also need to provide styles, see https://github.com/negomi/react-burger-menu#styling
+        const options = [];
+        for (var idx in this.state.filenameList) {
+            options.push({ value: this.state.filenameList[idx], label: this.state.filenameList[idx] });
+        }
         return (
             <Menu pageWrapId={"map-container-webgl-id"} outerContainerId={"App"}>
-      <div dangerouslySetInnerHTML={{ __html: this.state.currentHtml }} />
-                <button onClick={this.test1} className="menu-item">Show trip summary</button>
-                <button onClick={this.test2} className="menu-item--small">Next trip</button>
+                {/* <h1>{this.props.getTitle()}</h1> */}
+                <Select options={options} onChange={this.handleChange} />
+                <div dangerouslySetInnerHTML={{ __html: this.state.currentHtml }} />
             </Menu>
         );
     }

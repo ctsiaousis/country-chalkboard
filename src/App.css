@@ -69,7 +69,7 @@ body>#root>div {
   z-index: 1;
   position: absolute;
   top: 0;
-  right:0;
+  right: 0;
   margin: 12px;
   border-radius: 4px;
 }
@@ -185,3 +185,4 @@ Note: Beware of modifying this element as it can break the animations - you shou
 .bm-overlay {
   background: rgba(0, 0, 0, 0.3);
 }
+
