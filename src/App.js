@@ -17,6 +17,8 @@ marked.use(markedImages(opts));
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
 
+
+///////////////////////////////////////// Global undefined vars /////////////////////////////////////////
 var updateID = -1;
 var mapContainer = undefined;
 var map = undefined;
@@ -24,65 +26,14 @@ var [RELOADED, setRELOADED] = [false, () => { }];
 var [lng, setLng] = [undefined, () => { }];
 var [lat, setLat] = [undefined, () => { }];
 var [zoom, setZoom] = [undefined, () => { }];
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-//////////////////////////////////////////////testing//////////////////////////////////////////////
+//////////////////////////////////////// Parser and Country data ////////////////////////////////////////
 let customData = [...Parser.data()];
 var alpha3Map = new Map();
 let mParser = new Parser("myTrip.md");
-// SideBar.setParserFilenameCallback(mParser.setMdFileName);
-// SideBar.setParserCallback(
-mParser.parse().then(function () {
-  for (var row of customData) {
-    if (mParser.visitedCountries.includes(row['Country'])) {
-      row['en'] = true;
-    }
-    alpha3Map.set(row['Alpha3'], [row['en'], row['Lat'], row['Lon']]);
-  }
-  console.log(mParser.getTripEntries());
-  console.log(mParser.getCurrentEntryIdx());
-  updateID++;
-})
-// );
-
-function getTripTitle() {
-  return mParser.tripInfo.title;
-} 
-function getSidebarState() {
-  return {
-    currentHtml: marked.parse(mParser.getCurTripMarkdown()),
-    currentTripIdx: mParser.getCurrentEntryIdx(),
-    currentFilename: mParser.md_file,
-    totalFilenames: mParser.getTripEntries().length,
-    filenameList: mParser.getTripEntries()
-  };
-}
-
-function parseNextTrip(filename = '') {
-  if(filename === ''){
-    var idx = mParser.getCurrentEntryIdx();
-    idx = (idx + 1) % mParser.getTripEntries().length;
-    mParser.setMdFileName(mParser.getTripEntries()[idx]);
-  }else{
-    mParser.setMdFileName(filename);
-  }
-
-  for (var row of customData) {
-    row['en'] = false;
-  }
-  alpha3Map.clear();
-  mParser.parse().then(function () {
-    for (var row of customData) {
-      if (mParser.visitedCountries.includes(row['Country'])) {
-        row['en'] = true;
-      }
-      alpha3Map.set(row['Alpha3'], [row['en'], row['Lat'], row['Lon']]);
-    }
-    setRELOADED(true);
-    updateID++;
-  });
-}
-/////////////////////////////////////////////\testing//////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 export default function App() {
@@ -93,7 +44,7 @@ export default function App() {
   [zoom, setZoom] = useState(3.5);
   [RELOADED, setRELOADED] = useState(false);
 
-  InitMap(mapContainer, map, lng, setLng, lat, setLat, zoom, setZoom, false);
+  InitMap(mapContainer, map, lng, setLng, lat, setLat, zoom, setZoom);
 
   return (
     <div id="App">
@@ -109,10 +60,10 @@ export default function App() {
 
 
 
-function InitMap(mapContainer, map, lng, setLng, lat, setLat, zoom, setZoom, forceReset) {
+function InitMap(mapContainer, map, lng, setLng, lat, setLat, zoom, setZoom) {
 
   useEffect(() => {
-    if (map.current && !forceReset) return; // initialize map only once
+    if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/christsiao/cl6cd2tt4000i14n3wbc7g0kt',
@@ -146,6 +97,7 @@ function InitMap(mapContainer, map, lng, setLng, lat, setLat, zoom, setZoom, for
 
 
 
+/////////////////////////////////////////////// Map Event Functions /////////////////////////////////////////////// 
 function onMapLoad() {
   //remove old layers and source in case of reload
   if (map.current.getLayer("countries-join")) {
@@ -303,3 +255,46 @@ function onMapMove() {
   setLat(map.current.getCenter().lat.toFixed(4));
   setZoom(map.current.getZoom().toFixed(2));
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+
+
+/////////////////////////////////////////// Sidebar Callback Functions /////////////////////////////////////////// 
+function getTripTitle() {
+  return mParser.tripInfo.title;
+}
+
+function getSidebarState() {
+  return {
+    currentHtml: marked.parse(mParser.getCurTripMarkdown()),
+    currentTripIdx: mParser.getCurrentEntryIdx(),
+    currentFilename: mParser.md_file,
+    totalFilenames: mParser.getTripEntries().length,
+    filenameList: mParser.getTripEntries()
+  };
+}
+
+function parseNextTrip(filename = '') {
+  if(filename === ''){
+    var idx = mParser.getCurrentEntryIdx();
+    idx = (idx + 1) % mParser.getTripEntries().length;
+    mParser.setMdFileName(mParser.getTripEntries()[idx]);
+  }else{
+    mParser.setMdFileName(filename);
+  }
+
+  for (var row of customData) {
+    row['en'] = false;
+  }
+  alpha3Map.clear();
+  mParser.parse().then(function () {
+    for (var row of customData) {
+      if (mParser.visitedCountries.includes(row['Country'])) {
+        row['en'] = true;
+      }
+      alpha3Map.set(row['Alpha3'], [row['en'], row['Lat'], row['Lon']]);
+    }
+    setRELOADED(true);
+    updateID++;
+  });
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////

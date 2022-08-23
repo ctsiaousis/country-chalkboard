@@ -63,8 +63,9 @@ export class SideBar extends React.Component {
             options.push({ value: this.state.filenameList[idx], label: this.state.filenameList[idx] });
         }
         return (
-            <Menu pageWrapId={"map-container-webgl-id"} outerContainerId={"App"}>
+            <Menu width={ 380 } pageWrapId={"map-container-webgl-id"} outerContainerId={"App"}>
                 {/* <h1>{this.props.getTitle()}</h1> */}
+                <h3>Select a trip and start exploring 🔭</h3>
                 <Select options={options} onChange={this.handleChange} />
                 <div dangerouslySetInnerHTML={{ __html: this.state.currentHtml }} />
             </Menu>

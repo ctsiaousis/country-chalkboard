@@ -1,5 +1,13 @@
 # My US trip
 
+#### What I did
+| Day         | Place        | Activity      |
+| :---        |    :----:    |          ---: |
+| Monday      | forest       | pic-nic       |
+| Tuesday     | home         | nada          |
+| Wednesday   | seaside      | beers         |
+| Thursday    | walking around | sightseeing |
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sodales vestibulum commodo. Vestibulum vestibulum ligula a ultricies gravida. Curabitur sed nisl venenatis, tincidunt ligula vel, imperdiet nibh. Aenean consequat lorem sit amet enim posuere, vitae sollicitudin lacus placerat. Cras blandit eget metus eu lacinia. Ut vehicula nisl quam, in maximus risus consectetur et. Duis in odio enim. Ut nec lectus id neque porta imperdiet. Aenean nec nisl sit amet nibh pretium fringilla ac at libero. Donec tincidunt rutrum ante eu venenatis. Curabitur dictum malesuada arcu. Donec aliquam mi sodales, ornare nibh eget, interdum velit.
 
 ## Canada
