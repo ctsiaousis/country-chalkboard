@@ -15,7 +15,7 @@ This project is currently in development.
 - [x] Display a pop-up with country info
 - [x] Sidebar to select different trips
 - [x] Trip summary displayed on sidebar
-- [ ] Auto focus first country when trip changes
+- [x] Auto focus first country when trip changes
 - [ ] Support for (graphical) paths and country ordering
 - [ ] Support embeded videos on country pop-ups
 - [ ] Add about section

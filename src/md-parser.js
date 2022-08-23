@@ -64,7 +64,6 @@ export class Parser {
         return `# ${this.tripInfo.title}\n`+this.tripInfo.body;
     }
 
-    // Method
     async parse() {
         if (!tripEntries.includes(this.md_file)) {
             this.is_valid = false;
@@ -76,12 +75,6 @@ export class Parser {
         this.raw_contents = '';
         this.tripInfo = new MdTuple('', '');
         this.countriesInfo = new Map();
-        // console.log(tripEntries.includes(this.md_file));
-        // console.log(tripEntries.indexOf(this.md_file));
-        // console.log(Markdown[tripEntries.indexOf(this.md_file)]);
-        // console.log(Markdown);
-
-        // this.parseFromFile(Markdown[tripEntries.indexOf(this.md_file)]);
 
         console.log(Markdown[tripEntries.indexOf(this.md_file)]);
         console.log(this.images);

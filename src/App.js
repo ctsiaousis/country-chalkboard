@@ -121,6 +121,7 @@ function onMapLoad() {
   // Use the ISO 3166-1 alpha 3 code as the lookup key for the country shape
   const matchExpression = ['match', ['get', 'iso_3166_1_alpha_3']];
 
+  let first = true;
   // Calculate color values for each country based on 'hdi' value
   for (const row of customData) {
     // Convert the range of data values to a suitable color
@@ -132,8 +133,13 @@ function onMapLoad() {
       format: 'rgba',
       alpha: 0.5 // e.g. 'rgba(9, 1, 107, 0.5)',
     });
-    if (enabled)
+    if (enabled){
       matchExpression.push(row['Alpha3'], color);
+      if(first){
+        map.current.setCenter([row['Lon'], row['Lat']]);
+        first = false;
+      }
+    }
   }
 
   // Last value is the default, used where there is no data
