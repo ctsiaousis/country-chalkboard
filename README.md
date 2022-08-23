@@ -22,6 +22,8 @@ This project is currently in development.
 - [ ] Support for (graphical) paths and country ordering
 - [ ] Add regional boundary functionality
 - [ ] Add city functionality
+- [ ] Markdown folder structure
+- [ ] Port to containerized web app with interactive creation tools
 
 
 ## Project Screen Shot(s)
