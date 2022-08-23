@@ -26,7 +26,9 @@ This project is currently in development.
 
 ## Project Screen Shot(s)
 
-TODO
+![main view](./Screenshots/image-1661281685.png)
+
+![side menu](./Screenshots/image-1661281708.png)
 
 ## DEMO
 
