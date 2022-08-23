@@ -1,9 +1,12 @@
-
 import React from 'react';
 import { pushRotate as Menu } from 'react-burger-menu';
-
 import Select from 'react-select'
 
+
+var aboutStr = "A static website that parses markdown files and images, that depict one's journey/vacations, to project them on a globe.\n"+
+"Share your travel experiences in a unique and interactive way!\n"+
+"Author: Chris Tsiaousis <ctsiaous@gmail.com>\n"+
+"License: GPL v3";
 
 export class SideBar extends React.Component {
     constructor(props) {
@@ -56,19 +59,21 @@ export class SideBar extends React.Component {
         this.props.parseNext(selectedOption.value);
     }
 
+
     render() {
         // NOTE: You also need to provide styles, see https://github.com/negomi/react-burger-menu#styling
         const options = [];
         for (var idx in this.state.filenameList) {
             options.push({ value: this.state.filenameList[idx], label: this.state.filenameList[idx] });
         }
+        
         return (
-            <Menu width={ 380 } pageWrapId={"map-container-webgl-id"} outerContainerId={"App"}>
+            <Menu width={380} pageWrapId={"map-container-webgl-id"} outerContainerId={"App"}>
                 {/* <h1>{this.props.getTitle()}</h1> */}
+                <button onClick={() => alert(aboutStr)}>About</button>
                 <h3>Select a trip and start exploring 🔭</h3>
                 <Select options={options} onChange={this.handleChange} />
                 <div dangerouslySetInnerHTML={{ __html: this.state.currentHtml }} />
-                <button type="button">Click</button>
             </Menu>
         );
     }

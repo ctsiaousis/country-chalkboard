@@ -2,7 +2,7 @@
 
 A creative way to keep a diary of your journeys.
 
-A static website that parses markdown files and images to project them on a globe.
+A static website that parses markdown files and images, that depict one's journey/vacations, to project them on a globe.
 Built with React, Mapbox, JavaScript, and CSS.
 
 ## Project Status
@@ -17,9 +17,9 @@ This project is currently in development.
 - [x] Trip summary displayed on sidebar
 - [x] Auto focus first country when trip changes
 - [x] Support embeded videos on country pop-ups
+- [x] Add about section
 - [ ] Auto find available markdown files
 - [ ] Support for (graphical) paths and country ordering
-- [ ] Add about section
 - [ ] Add regional boundary functionality
 - [ ] Add city functionality
 

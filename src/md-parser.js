@@ -1,11 +1,18 @@
 import { data, testVisitedCountries } from './codeData';
 // const nReadlines = require('n-readlines');
 const Markdown = {};
-const tripEntries = ["myTrip.md", "anotherTrip.md"];
+var tripEntries = importAll(require.context('./markdown/', true, /\.(md)$/));
+console.log(tripEntries);
 
+let clearTripEntries = [];
 for (let entry in tripEntries) {
-    Markdown[entry] = require(`./markdown/${tripEntries[entry]}`)
+    let fname = tripEntries[entry].replace("/country-chalkboard/static/media/","");
+    fname = fname.split(".").at(0);
+    Markdown[entry] = require(`./markdown/${fname}.md`)
+    clearTripEntries.push(`${fname}`)
 }
+
+tripEntries = [...clearTripEntries]
 
 function importAll(r) {
     return r.keys().map(r);

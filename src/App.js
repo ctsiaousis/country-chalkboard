@@ -121,6 +121,8 @@ function onMapLoad() {
   // Use the ISO 3166-1 alpha 3 code as the lookup key for the country shape
   const matchExpression = ['match', ['get', 'iso_3166_1_alpha_3']];
 
+  console.log(`INIT MAP ${updateID}`)
+  if(updateID === -1) return;
   let first = true;
   // Calculate color values for each country based on 'hdi' value
   for (const row of customData) {
@@ -193,6 +195,7 @@ function onMapLoad() {
 
 function onMapClick(e) {
   // Copy coordinates array.
+  if(! map.current.getLayer("countries-join")) return;
   var features = map.current.queryRenderedFeatures(e.point, { layers: ["countries-join", "country-label"] });
   let visited = false;
   let featureProp;
@@ -228,6 +231,7 @@ function onMapClick(e) {
 
 function onMouseMove(e) {
   if (!map.current.loaded()) return; // wait for map to initialize
+  if(! map.current.getLayer("countries-join")) return;
   var features = map.current.queryRenderedFeatures(e.point, { layers: ["countries-join", "country-label"] });
 
   console.log(features);
@@ -252,6 +256,7 @@ function onMouseMove(e) {
 
 function onMouseOut() {
   if (!map.current.loaded()) return; // wait for map to initialize
+  if(! map.current.getLayer("countries-join-2")) return;
   map.current.getCanvas().style.cursor = 'auto';
   map.current.setFilter("countries-join-2", ["==", "name", ""]);
 }
