@@ -53,8 +53,8 @@ export class SideBar extends React.Component {
         return (
             <Menu pageWrapId={"map-container-webgl-id"} outerContainerId={"App"}>
       <div dangerouslySetInnerHTML={{ __html: this.state.currentHtml }} />
-                <button onClick={this.test1} className="menu-item">Test1</button>
-                <button onClick={this.test2} className="menu-item--small">Test2</button>
+                <button onClick={this.test1} className="menu-item">Show trip summary</button>
+                <button onClick={this.test2} className="menu-item--small">Next trip</button>
             </Menu>
         );
     }
