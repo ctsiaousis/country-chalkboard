@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/country-chalkboard/static/css/main.31adb83a.css",
-    "main.js": "/country-chalkboard/static/js/main.21aeb574.js",
+    "main.js": "/country-chalkboard/static/js/main.c777590e.js",
     "static/media/madagascar.jpg": "/country-chalkboard/static/media/madagascar.378e6b077f796d65edd8.jpg",
     "static/media/spain.jpg": "/country-chalkboard/static/media/spain.50c77ad5f2a62f659c11.jpg",
     "static/media/greece.jpg": "/country-chalkboard/static/media/greece.041b0b7c82129e6163ed.jpg",
@@ -12,10 +12,10 @@
     "static/media/anotherTrip.md": "/country-chalkboard/static/media/anotherTrip.63bdce0250f4220560dd.md",
     "index.html": "/country-chalkboard/index.html",
     "main.31adb83a.css.map": "/country-chalkboard/static/css/main.31adb83a.css.map",
-    "main.21aeb574.js.map": "/country-chalkboard/static/js/main.21aeb574.js.map"
+    "main.c777590e.js.map": "/country-chalkboard/static/js/main.c777590e.js.map"
   },
   "entrypoints": [
     "static/css/main.31adb83a.css",
-    "static/js/main.21aeb574.js"
+    "static/js/main.c777590e.js"
   ]
 }
