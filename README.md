@@ -18,7 +18,7 @@ This project is currently in development.
 - [x] Auto focus first country when trip changes
 - [x] Support embeded videos on country pop-ups
 - [x] Add about section
-- [ ] Auto find available markdown files
+- [x] Auto find available markdown files
 - [ ] Support for (graphical) paths and country ordering
 - [ ] Add regional boundary functionality
 - [ ] Add city functionality
