@@ -51,3 +51,6 @@ This was a two week long project built during my 2022 vacation. The goal was to 
 utilizes **Github Pages** and can be *forked* by anyone to post their trips/vacation etc. I might sometime create a propr 
 web application for it with users, online edit, commenting, notifications and so on. 
 
+## Contributing
+
+See [CONTRIBUTING](./CONTRIBUTING).
