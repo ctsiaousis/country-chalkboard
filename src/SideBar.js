@@ -70,7 +70,8 @@ export class SideBar extends React.Component {
         return (
             <Menu width={380} pageWrapId={"map-container-webgl-id"} outerContainerId={"App"}>
                 {/* <h1>{this.props.getTitle()}</h1> */}
-                <button onClick={() => alert(aboutStr)}>About</button>
+                <button name="mybutton" onClick={() => alert(aboutStr)}>About</button>
+                <a href="https://github.com/ctsiaousis/country-chalkboard" rel="noreferrer" target="_blank">Source Code</a>
                 <h3>Select a trip and start exploring 🔭</h3>
                 <Select options={options} onChange={this.handleChange} />
                 <div dangerouslySetInnerHTML={{ __html: this.state.currentHtml }} />

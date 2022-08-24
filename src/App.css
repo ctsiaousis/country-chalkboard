@@ -68,10 +68,34 @@ body>#root>div {
   font-family: monospace;
   z-index: 1;
   position: absolute;
-  top: 0;
+  bottom: 0;
   right: 0;
-  margin: 12px;
+  margin: 12px 0px 24px;
   border-radius: 4px;
+}
+
+a:link {
+  color: #4c66af;
+}
+
+/* visited link */
+a:visited {
+  color: #4c66af;
+}
+
+/* mouse over link */
+a:hover {
+  color: hotpink;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+}
+
+a[target="_blank"]::after {
+  content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==);
+  margin: 0 3px 0 5px;
 }
 
 .mapboxgl-popup {
@@ -130,7 +154,7 @@ table {
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: #373a47;
+  background: #4c66af;
 }
 
 /* Color/shape of burger icon bars on hover*/
@@ -182,6 +206,19 @@ Note: Beware of modifying this element as it can break the animations - you shou
 /* Individual item */
 .bm-item {
   display: inline-block;
+}
+
+.bm-item[name=mybutton] {
+  background-color: #4c66af;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
 }
 
 /* Styling of overlay */
