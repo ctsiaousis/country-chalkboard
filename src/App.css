@@ -99,8 +99,8 @@ a[target="_blank"]::after {
 }
 
 .mapboxgl-popup {
-  overflow-y: scroll;
-  overflow-x: scroll;
+  overflow-y: hidden;
+  overflow-x: hidden;
   max-width: 300px !important;
   max-height: 400px !important;
   font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
