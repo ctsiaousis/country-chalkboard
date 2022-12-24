@@ -24,7 +24,7 @@
     "react-select": "^5.4.0",
     "node-polyfill-webpack-plugin": "^2.0.1"
   },
-  "devDependencies":{
+  "devDependencies": {
     "gh-pages": "^4.0.0"
   },
   "scripts": {
