@@ -68,7 +68,7 @@ export class SideBar extends React.Component {
         }
         
         return (
-            <Menu width={380} pageWrapId={"map-container-webgl-id"} outerContainerId={"App"}>
+            <Menu width={340} pageWrapId={"map-container-webgl-id"} outerContainerId={"App"}>
                 {/* <h1>{this.props.getTitle()}</h1> */}
                 <button name="mybutton" onClick={() => alert(aboutStr)}>About</button>
                 <a href="https://github.com/ctsiaousis/country-chalkboard" rel="noreferrer" target="_blank">Source Code</a>
