@@ -39,9 +39,9 @@ let mParser = new Parser("myTrip.md");
 export default function App() {
   mapContainer = useRef(null);
   map = useRef(null);
-  [lng, setLng] = useState(24.018038);
-  [lat, setLat] = useState(35.513828);
-  [zoom, setZoom] = useState(3.5);
+  [lng, setLng] = useState(1.2412);//(24.018038);
+  [lat, setLat] = useState(0.2935);//(35.513828);
+  [zoom, setZoom] = useState(2.2);
   [RELOADED, setRELOADED] = useState(false);
 
   InitMap(mapContainer, map, lng, setLng, lat, setLat, zoom, setZoom);
@@ -49,7 +49,7 @@ export default function App() {
   return (
     <div id="App">
       <SideBar pageWrapId={"map-container-webgl-id"} outerContainerId={"App"} getState={getSidebarState}
-      parseNext={parseNextTrip} getTitle={getTripTitle} updateID={updateID}/>
+        parseNext={parseNextTrip} getTitle={getTripTitle} updateID={updateID} />
       <div className="infobar">
         Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
       </div>
@@ -68,7 +68,17 @@ function InitMap(mapContainer, map, lng, setLng, lat, setLat, zoom, setZoom) {
       container: mapContainer.current,
       style: 'mapbox://styles/christsiao/cl6cd2tt4000i14n3wbc7g0kt',
       center: [lng, lat],
-      zoom: zoom
+      zoom: zoom,
+      minZoom: 0.9,
+      maxBounds: [
+        [-180, -90], // Southwest coordinates
+        [180, 90]    // Northeast coordinates
+      ],
+      projection: {
+        name: 'mercator',//'naturalEarth',
+        center: [lng, lat],
+        parallels: [90, 90]
+      }
     });
 
     map.current.on('load', onMapLoad);
@@ -122,7 +132,7 @@ function onMapLoad() {
   const matchExpression = ['match', ['get', 'iso_3166_1_alpha_3']];
 
   console.log(`INIT MAP ${updateID}`)
-  if(updateID === -1) return;
+  if (updateID === -1) return;
   let first = true;
   // Calculate color values for each country based on 'hdi' value
   for (const row of customData) {
@@ -135,9 +145,9 @@ function onMapLoad() {
       format: 'rgba',
       alpha: 0.5 // e.g. 'rgba(9, 1, 107, 0.5)',
     });
-    if (enabled){
+    if (enabled) {
       matchExpression.push(row['Alpha3'], color);
-      if(first){
+      if (first) {
         map.current.setCenter([row['Lon'], row['Lat']]);
         first = false;
       }
@@ -195,7 +205,7 @@ function onMapLoad() {
 
 function onMapClick(e) {
   // Copy coordinates array.
-  if(! map.current.getLayer("countries-join")) return;
+  if (!map.current.getLayer("countries-join")) return;
   var features = map.current.queryRenderedFeatures(e.point, { layers: ["countries-join", "country-label"] });
   let visited = false;
   let featureProp;
@@ -231,7 +241,7 @@ function onMapClick(e) {
 
 function onMouseMove(e) {
   if (!map.current.loaded()) return; // wait for map to initialize
-  if(! map.current.getLayer("countries-join")) return;
+  if (!map.current.getLayer("countries-join")) return;
   var features = map.current.queryRenderedFeatures(e.point, { layers: ["countries-join", "country-label"] });
 
   console.log(features);
@@ -256,7 +266,7 @@ function onMouseMove(e) {
 
 function onMouseOut() {
   if (!map.current.loaded()) return; // wait for map to initialize
-  if(! map.current.getLayer("countries-join-2")) return;
+  if (!map.current.getLayer("countries-join-2")) return;
   map.current.getCanvas().style.cursor = 'auto';
   map.current.setFilter("countries-join-2", ["==", "name", ""]);
 }
@@ -285,11 +295,11 @@ function getSidebarState() {
 }
 
 function parseNextTrip(filename = '') {
-  if(filename === ''){
+  if (filename === '') {
     var idx = mParser.getCurrentEntryIdx();
     idx = (idx + 1) % mParser.getTripEntries().length;
     mParser.setMdFileName(mParser.getTripEntries()[idx]);
-  }else{
+  } else {
     mParser.setMdFileName(filename);
   }
 

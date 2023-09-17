@@ -73,7 +73,7 @@ export class SideBar extends React.Component {
                 <button name="mybutton" onClick={() => alert(aboutStr)}>About</button>
                 <a href="https://github.com/ctsiaousis/country-chalkboard" rel="noreferrer" target="_blank">Source Code</a>
                 <h3>Select a trip and start exploring 🔭</h3>
-                <Select options={options} onChange={this.handleChange} />
+                <Select options={options} onChange={this.handleChange} isSearchable={ false }/>
                 <div dangerouslySetInnerHTML={{ __html: this.state.currentHtml }} />
             </Menu>
         );
